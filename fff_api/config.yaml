@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Flashforge Finder API
-version: "0.2.2"
+version: "0.2.3"
 slug: fff_api
 description: API server for Flashforge Finder
 url: "https://github.com/paulsbroomfield/hassio-addons/tree/master/fff_api"
