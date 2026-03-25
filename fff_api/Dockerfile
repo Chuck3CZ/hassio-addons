@@ -15,7 +15,8 @@ RUN git clone https://github.com/Chuck3CZ/flashforge-finder-api.git /fff_api
 # Copy services
 COPY rootfs /
 
-RUN chmod +x /etc/cont-init.d/fff-api.sh
-RUN chmod +x /etc/services.d/fff-api/*
+#RUN chmod +x /etc/cont-init.d/fff-api.sh
+#RUN chmod +x /etc/services.d/fff-api/*
+RUN chmod +x /fff-api/run
 # Optional: remove build deps to slim down image
 #RUN apk del build-deps
