@@ -1,6 +1,6 @@
 name: "Skylight"
 description: "ADS-B radar letadel promítaný na projektor (cpaczek/skylight)"
-version: "1.0.1"
+version: "1.1.0"
 slug: "skylight"
 arch:
   - aarch64
@@ -12,3 +12,16 @@ ports:
   3000/tcp: 3000
 ports_description:
   3000/tcp: "Skylight display / control panel"
+options:
+  radius_miles: 3
+  data_source: "api"
+schema:
+  center_lat: "float?"
+  center_lon: "float?"
+  location_name: "str?"
+  radius_miles: "int(1,50)"
+  airport_icao: "str?"
+  data_source: "list(api|radio)"
+  aircraft_json_url: "str?"
+  rotation_deg: "int(0,359)?"
+  theme: "list(ambient|telemetry|focus)?"

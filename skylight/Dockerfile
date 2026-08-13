@@ -11,6 +11,10 @@ RUN pnpm -F web build
 # it at Supervisor's persistent /data mount so config survives app restarts.
 RUN rm -rf /app/server/data && ln -s /data /app/server/data
 
+COPY apply-options.js /apply-options.js
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
+
 ENV HOST=0.0.0.0 PORT=3000 NODE_ENV=production DATA_SOURCE=api
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["/run.sh"]

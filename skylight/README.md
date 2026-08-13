@@ -12,28 +12,24 @@ Supervisor's per-app `/data` mount (the Dockerfile symlinks Skylight's hardcoded
 
 ## Setup
 
-1. Install this app, start it.
-2. Set your location — there's no field for it in the Configuration tab (it's runtime
-   state, not an app option), so use the REST API from the Home Assistant host:
-
-   ```bash
-   curl -s --get "http://127.0.0.1:3000/api/geocode" --data-urlencode "q=<your address>"
-   # -> {"lat":..., "lon":..., "name":...}
-
-   curl -s -X POST "http://127.0.0.1:3000/api/config" \
-     -H "Content-Type: application/json" \
-     -d '{"centerLat": 50.13, "centerLon": 14.41, "locationName": "Prague"}'
-   ```
-
-3. Optional: add your local airport's runway overlay (default is SFO):
-
-   ```bash
-   curl -s "http://127.0.0.1:3000/api/airport?code=<ICAO or IATA>"
-   # feed the returned JSON straight into POST /api/config as {"airport": {...}}
-   ```
-
-   Runways only render if the airport falls within `radiusMiles` of your location —
-   bump that in the same way if it's further out.
+1. Install this app.
+2. In the **Configuration** tab, set:
+   - `center_lat` / `center_lon` — your coordinates (decimal degrees). Look them up
+     with `curl -s --get "http://127.0.0.1:3000/api/geocode" --data-urlencode "q=<your address>"`
+     from the Home Assistant host if you don't have them handy.
+   - `location_name` — display name for the location.
+   - `radius_miles` — how far out to show traffic (default 3). Also determines
+     whether `airport_icao`'s runway overlay falls in view.
+   - `airport_icao` — ICAO or IATA code for a runway overlay (optional, default is
+     none — upstream Skylight itself defaults to SFO, this app doesn't preset one).
+   - `data_source` — `api` (default, no hardware, free airplanes.live feed) or
+     `radio` (a local dump1090/readsb feed via `aircraft_json_url`).
+   - `rotation_deg`, `theme` — optional display tweaks.
+3. Start (or Restart) the app — `apply-options.js` pushes these into Skylight's own
+   REST API (`/api/config`, `/api/airport`, `/api/source`) once at boot, since
+   Skylight has no native env-var config for them (it's runtime state normally set
+   from its own control panel). Leave a field blank/unset to not touch that setting
+   (e.g. on later restarts, once you've since fine-tuned things from `/control`).
 
 ## Showing it on an actual projector
 
