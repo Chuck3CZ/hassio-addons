@@ -52,5 +52,6 @@ replaceAllPattern(R, '`500 14px ${cfg.fonts.label}`', '`500 ${Math.round(14 * cf
 replaceAllPattern(R, '`400 11px ${cfg.fonts.label}`', '`400 ${Math.round(11 * cfg.textScale)}px ${cfg.fonts.label}`', 2);
 replaceAllPattern(R, '`300 34px ${cfg.fonts.label}`', '`300 ${Math.round(34 * cfg.textScale)}px ${cfg.fonts.label}`', 1);
 replaceAllPattern(R, '`400 15px ${cfg.fonts.label}`', '`400 ${Math.round(15 * cfg.textScale)}px ${cfg.fonts.label}`', 1);
+replaceAllPattern(R, 'const lh = 16;', 'const lh = Math.round(16 * cfg.textScale);', 1);
 
 console.log('OK: patched config.ts, Control.tsx, renderer.ts');
