@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends git ca-certific
 RUN corepack enable
 WORKDIR /app
 RUN git clone --depth 1 https://github.com/cpaczek/skylight.git .
+COPY patch-textscale.js .
+RUN node patch-textscale.js
 RUN pnpm install --frozen-lockfile --filter server --filter web --filter shared
 RUN pnpm -F web build
 
