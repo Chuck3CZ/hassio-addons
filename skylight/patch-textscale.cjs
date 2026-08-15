@@ -36,7 +36,7 @@ replaceAllPattern(
     '              onChange={(v) => set({ glyphSizePx: v })} />\n' +
     '          </Row>\n' +
     '          <Row label="Text size">\n' +
-    '            <Slider id="textScale" value={cfg.textScale} min={0.7} max={1.6} step={0.05} unit="×"\n' +
+    '            <Slider id="textScale" value={cfg.textScale} min={0.5} max={3} step={0.05} unit="×"\n' +
     '              onChange={(v) => set({ textScale: v })} />\n' +
     '          </Row>\n',
   1,
